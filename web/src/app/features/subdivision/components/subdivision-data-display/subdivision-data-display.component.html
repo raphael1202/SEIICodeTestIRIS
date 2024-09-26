@@ -1,17 +1,10 @@
 <div class="subdvision-page" *ngIf="!loading">
   <div *ngIf="message" class="message">{{ message }}</div>
 
-  <div class="filter-sort-controls" *ngIf="!message">
-    <mat-form-field>
-      <mat-label>Filter by Subdivision Status</mat-label>
-      <mat-select [(value)]="filterValue" (selectionChange)="applyFilter()">
-        <mat-option value="">All</mat-option>
-        <mat-option value="Active">Active</mat-option>
-        <mat-option value="Future">Future</mat-option>
-        <mat-option value="Builtout">Builtout</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
+  <app-subdivision-filter
+    *ngIf="!message"
+    (filterChange)="applyFilter($event)"
+  ></app-subdivision-filter>
 
   <table mat-table [dataSource]="dataSource" matSort *ngIf="!message">
     <ng-container matColumnDef="id">

@@ -20,7 +20,6 @@ export class SubdivisionDataDisplayComponent implements AfterViewInit, OnInit {
   pageIndex = 0;
   loading = false;
   message: string = "";
-  filterValue: string = "";
 
   @ViewChild(MatPaginator, { static: false })
   set paginator(value: MatPaginator) {
@@ -80,8 +79,9 @@ export class SubdivisionDataDisplayComponent implements AfterViewInit, OnInit {
     this.loadSubdivisions();
   }
 
-  applyFilter(): void {
-    this.dataSource.filter = this.filterValue.trim().toLowerCase();
+  applyFilter(filterValue: string): void {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
     this.dataSource.filterPredicate = (data: Subdivision, filter: string) => {
       return data.subdivisionStatusCode.toLowerCase().includes(filter);
     };

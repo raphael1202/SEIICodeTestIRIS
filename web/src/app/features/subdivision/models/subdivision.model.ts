@@ -1,3 +1,5 @@
+export type SubdivisionStatusCode = "Active" | "Future" | "BUILT OUT";
+
 export interface Subdivision {
   id: number;
   code: string;
@@ -15,8 +17,17 @@ export interface Subdivision {
   fieldSurveyTerritoryName: string;
   marketName: string;
   marketAbbreviation: string;
-  subdivisionStatusCode: "ACTIVE" | "FUTURE" | "BUILT OUT";
+  subdivisionStatusCode: SubdivisionStatusCode;
   surveyMethodCode: string;
+  subdivisionGeometryBoundingBoxId: string | null;
+  subdivisionGeometryBoundaryId: number | null;
+  subdivisionGeometryIntelligenceBoundaryStatusId: number;
+  subdivisionGeometryIntelligenceBoundaryStatusChangeDate: string;
+  imageBoxId: number | null;
+  mostRecentIPointBatchDate: string | null;
+  iPoints: string | null;
+  validatediPoints: string | null;
+  subdivisionSpecificStatus: string;
   county: string;
   community: string | null;
   zoom17Date: string;

@@ -10,9 +10,10 @@ import { HttpClientModule } from "@angular/common/http";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatSortModule } from "@angular/material/sort";
+import { SubdivisionFilterComponent } from "./components/subdivision-filter/subdivision-filter.component";
 
 @NgModule({
-  declarations: [SubdivisionDataDisplayComponent],
+  declarations: [SubdivisionDataDisplayComponent, SubdivisionFilterComponent],
   imports: [
     CommonModule,
     HttpClientModule,
