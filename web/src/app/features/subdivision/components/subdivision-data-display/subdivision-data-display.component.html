@@ -1,0 +1,58 @@
+<div class="subdvision-page" *ngIf="!loading">
+  <div *ngIf="message" class="message">{{ message }}</div>
+
+  <div class="filter-sort-controls" *ngIf="!message">
+    <mat-form-field>
+      <mat-label>Filter by Subdivision Status</mat-label>
+      <mat-select [(value)]="filterValue" (selectionChange)="applyFilter()">
+        <mat-option value="">All</mat-option>
+        <mat-option value="Active">Active</mat-option>
+        <mat-option value="Future">Future</mat-option>
+        <mat-option value="Builtout">Builtout</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" matSort *ngIf="!message">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+      <td mat-cell *matCellDef="let row">{{ row.subdivisionStatusCode }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="nearMapImageDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Near Map Image Date
+      </th>
+      <td mat-cell *matCellDef="let row">
+        {{ formatDate(row.nearMapImageDate) }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    *ngIf="!message"
+    [length]="totalRecords"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+    [pageSizeOptions]="[5, 10, 20, 50, 100]"
+    (page)="pageChangeEvent($event)"
+    showFirstLastButtons
+    aria-label="Select page of subdivisions"
+  >
+  </mat-paginator>
+</div>
+
+<mat-spinner *ngIf="loading"></mat-spinner>
